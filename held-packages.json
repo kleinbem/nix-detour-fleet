@@ -28,6 +28,13 @@
     "reason": "Needs python3Packages.chromadb, which needs posthog, marked broken in nixos-unstable since mcp 2.x; the container-factory's open-webui container failed to evaluate.",
     "link": "https://github.com/NixOS/nixpkgs/pull/578265"
   },
+  "opencode": {
+    "from": "current",
+    "since": "2026-11-05",
+    "override": "overrides/opencode.nix",
+    "reason": "nixos-unstable has opencode 2.2.5 with a node_modules hash that never matched on Linux (hash mismatch in the fixed-output derivation), so nixos-nvme stopped building; this sets the hash from the upstream fix until nixos-unstable has it.",
+    "link": "https://github.com/NixOS/nixpkgs/pull/582675"
+  },
   "oterm": {
     "from": {
       "rev": "02c087f3fe673c9e317f206a627cb6b910336dbe",
