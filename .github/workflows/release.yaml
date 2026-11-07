@@ -1,7 +1,8 @@
 name: release
-# Weekly: every held package whose cause builds again in nixos-unstable gets a
-# PR removing its hold (auto-merge); one held for more than 14 days alerts
-# via ntfy, since it misses the fixes of the newer nixpkgs.
+# Weekly: every held package whose cause builds again in nixos-unstable, on
+# x86_64 and aarch64, gets a PR removing its hold (auto-merge); one held for
+# more than 14 days alerts via ntfy, since it misses the fixes of the newer
+# nixpkgs.
 on:
   workflow_dispatch:
   schedule:
@@ -11,7 +12,33 @@ on:
 permissions: {}
 
 jobs:
+  # The Pis and orin-nano use the holds too: check-only here, and its `held`
+  # keeps those holds in the release job below.
+  check-aarch64:
+    runs-on: ubuntu-24.04-arm
+    permissions:
+      contents: read
+    outputs:
+      held: ${{ steps.check.outputs.held }}
+      stale: ${{ steps.check.outputs.stale }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+          persist-credentials: false
+
+      - uses: kleinbem/actions/nix-setup@f716d62182471a9e862ae0bd61d34201e6cea971 # v1.3.1
+        with:
+          attic-token: ${{ secrets.ATTIC_PULL_TOKEN }}
+          netbird-setup-key: ${{ secrets.NETBIRD_SETUP_KEY_EPHEMERAL }}
+
+      - uses: kleinbem-dev/nix-detour/hold-release@e0504b7ed4a7fe909fcc5a042b5e52632e209a19 # main after v0.3.1 (open-prs, keep)
+        id: check
+        with:
+          open-prs: "false"
+
   release:
+    needs: check-aarch64
     runs-on: ubuntu-latest
     steps:
       - name: Mint GitHub App installation token
@@ -39,17 +66,21 @@ jobs:
           attic-token: ${{ secrets.ATTIC_PULL_TOKEN }}
           netbird-setup-key: ${{ secrets.NETBIRD_SETUP_KEY_EPHEMERAL }}
 
-      - uses: kleinbem-dev/nix-detour/hold-release@b1bad90a62b55305a6a545b56de7bc2cb8392c42 # v0.3.1
+      - uses: kleinbem-dev/nix-detour/hold-release@e0504b7ed4a7fe909fcc5a042b5e52632e209a19 # main after v0.3.1 (open-prs, keep)
         id: release
         with:
           token: ${{ steps.app-token.outputs.token }}
+          keep: ${{ needs.check-aarch64.outputs.held }}
 
       - name: Alert for holds older than 14 days
         env:
           NTFY_TOPIC: ${{ secrets.NTFY_ALERT_TOPIC }}
-          long: ${{ steps.release.outputs.stale }}
+          stale_x86: ${{ steps.release.outputs.stale }}
+          stale_arm: ${{ needs.check-aarch64.outputs.stale }}
         run: |
           set -euo pipefail
+          # "name (N days)" entries from both systems, each once.
+          long=$(printf '%s %s' "$stale_x86" "$stale_arm" | grep -oE '[^ ]+ \([0-9]+ days\)' | sort -u | tr '\n' ' ' || true)
           if [ -z "$long" ] || [ -z "$NTFY_TOPIC" ]; then
             exit 0
           fi
