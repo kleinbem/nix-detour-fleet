@@ -19,5 +19,8 @@ jobs:
       - uses: kleinbem/actions/nix-setup@7ec628296d5194e6e10031706387b992a10a1638 # v1.0.1
       - name: Evaluate the held packages
         run: nix flake check
+      # The aarch64 hosts (Pis, orin-nano) use the holds too; evaluate them here.
+      - name: Evaluate the held packages for every system
+        run: nix flake check --all-systems --no-build
       - name: Formatting
         run: nix fmt -- --fail-on-change
