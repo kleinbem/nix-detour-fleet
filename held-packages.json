@@ -1,0 +1,60 @@
+{
+  "agent-task-queue": {
+    "from": {
+      "rev": "02c087f3fe673c9e317f206a627cb6b910336dbe",
+      "narHash": "sha256-IoNisKcGbUjdd45qCqywGMCYmZ5EnkxezvLII0FWwNA="
+    },
+    "since": "2026-10-27",
+    "releaseWhen": "python3Packages.fastmcp",
+    "reason": "Needs python3Packages.fastmcp, marked broken in nixos-unstable since mcp 2.x; nixos-nvme's home-manager MCP config failed to evaluate.",
+    "link": "https://github.com/NixOS/nixpkgs/pull/563493"
+  },
+  "aider-chat": {
+    "from": {
+      "rev": "02c087f3fe673c9e317f206a627cb6b910336dbe",
+      "narHash": "sha256-IoNisKcGbUjdd45qCqywGMCYmZ5EnkxezvLII0FWwNA="
+    },
+    "since": "2026-10-27",
+    "reason": "Needs python3Packages.posthog, marked broken in nixos-unstable since mcp 2.x; mac-mini's persona-runtime failed to evaluate, which held back the fleet's whole lock update.",
+    "link": "https://github.com/NixOS/nixpkgs/pull/578265"
+  },
+  "open-webui": {
+    "from": {
+      "rev": "02c087f3fe673c9e317f206a627cb6b910336dbe",
+      "narHash": "sha256-IoNisKcGbUjdd45qCqywGMCYmZ5EnkxezvLII0FWwNA="
+    },
+    "since": "2026-10-28",
+    "releaseWhen": "python3Packages.posthog",
+    "reason": "Needs python3Packages.chromadb, which needs posthog, marked broken in nixos-unstable since mcp 2.x; the container-factory's open-webui container failed to evaluate.",
+    "link": "https://github.com/NixOS/nixpkgs/pull/578265"
+  },
+  "opencode": {
+    "from": "current",
+    "since": "2026-11-05",
+    "override": "overrides/opencode.nix",
+    "reason": "nixos-unstable has opencode 2.2.5 with a node_modules hash that never matched on Linux (hash mismatch in the fixed-output derivation), so nixos-nvme stopped building; this sets the hash from the upstream fix until nixos-unstable has it.",
+    "link": "https://github.com/NixOS/nixpkgs/pull/582675"
+  },
+  "oterm": {
+    "from": {
+      "rev": "02c087f3fe673c9e317f206a627cb6b910336dbe",
+      "narHash": "sha256-IoNisKcGbUjdd45qCqywGMCYmZ5EnkxezvLII0FWwNA="
+    },
+    "since": "2026-10-27",
+    "releaseWhen": "python3Packages.fastmcp",
+    "reason": "Needs python3Packages.fastmcp, marked broken in nixos-unstable since mcp 2.x; nix-devshells' ai shell failed to evaluate.",
+    "link": "https://github.com/NixOS/nixpkgs/pull/563493"
+  },
+  "qdrant": {
+    "from": "current",
+    "since": "2026-11-01",
+    "patches": [
+      {
+        "url": "https://raw.githubusercontent.com/MiniHarinn/nixpkgs/b650fbaa91851f4e57f66ab811fdffcd5bac31c1/pkgs/by-name/qd/qdrant/0001-disable-avx512vnni.patch",
+        "hash": "sha256-QyG5gTn2LfZwPVTGWcTnNoc7oq830Wv/VyNmEbPDN+c="
+      }
+    ],
+    "reason": "rustc's stdarch and nixpkgs' LLVM disagree on an AVX-512 VNNI intrinsic (vpdpbusd), so qdrant's quantization crate fails to compile; this source patch from NixOS/nixpkgs#553347 disables those code paths. Ends once nixpkgs' qdrant builds again (rustc on LLVM 23, NixOS/nixpkgs#578990, plus a zstd input on staging-next). Held on stable (1.17.1) from 2026-10-13 until this fix on 2026-11-01.",
+    "link": "https://github.com/NixOS/nixpkgs/issues/553191"
+  }
+}
