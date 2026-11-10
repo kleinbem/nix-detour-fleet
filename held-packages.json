@@ -49,5 +49,12 @@
     ],
     "reason": "rustc's stdarch and nixpkgs' LLVM disagree on an AVX-512 VNNI intrinsic (vpdpbusd), so qdrant's quantization crate fails to compile; this source patch from NixOS/nixpkgs#553347 disables those code paths. Ends once nixpkgs' qdrant builds again (rustc on LLVM 23, NixOS/nixpkgs#578990, plus a zstd input on staging-next). Held on stable (1.17.1) from 2026-10-13 until this fix on 2026-11-01.",
     "link": "https://github.com/NixOS/nixpkgs/issues/553191"
+  },
+  "stalwart-cli": {
+    "from": "current",
+    "override": "overrides/stalwart-cli.nix",
+    "since": "2026-11-10",
+    "reason": "aws-lc-sys fails with AWS_LC_SYS_USE_SYSTEM=1 and no system aws-lc; nix-devshells' workspace shell failed to build, so direnv fell back to the old environment.",
+    "link": "https://github.com/NixOS/nixpkgs/pull/584509"
   }
 }
