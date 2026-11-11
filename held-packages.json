@@ -44,7 +44,7 @@
     "override": "overrides/goose-cli.nix",
     "since": "2026-11-11",
     "reason": "aws-lc-sys fails with AWS_LC_SYS_USE_SYSTEM=1 and no system aws-lc; fixed on master after nixos-unstable stalled at 2026-11-07, and it broke the nixos-nvme build.",
-    "link": "https://github.com/NixOS/nixpkgs/commit/2f16d1a4f7"
+    "link": "https://github.com/NixOS/nixpkgs/pull/585196"
   },
   "mesh-llm": {
     "from": "current",
@@ -58,7 +58,7 @@
     "override": "overrides/rust-system-libs.nix",
     "since": "2026-11-11",
     "reason": "aws-lc-sys fails with AWS_LC_SYS_USE_SYSTEM=1 and no system aws-lc; fixed on master after nixos-unstable stalled at 2026-11-07.",
-    "link": "https://github.com/NixOS/nixpkgs/commit/a8a0d9e4d2"
+    "link": "https://github.com/NixOS/nixpkgs/pull/584735"
   },
   "open-webui": {
     "from": {
