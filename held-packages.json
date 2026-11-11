@@ -18,6 +18,48 @@
     "reason": "Needs python3Packages.posthog, marked broken in nixos-unstable since mcp 2.x; mac-mini's persona-runtime failed to evaluate, which held back the fleet's whole lock update.",
     "link": "https://github.com/NixOS/nixpkgs/pull/578265"
   },
+  "berd": {
+    "from": "current",
+    "override": "overrides/rust-system-libs.nix",
+    "since": "2026-11-11",
+    "reason": "aws-lc-sys fails with AWS_LC_SYS_USE_SYSTEM=1; nix-packages pins NixOS/nixpkgs#580616 at a commit without aws-lc (the PR head has it).",
+    "link": "https://github.com/NixOS/nixpkgs/pull/580616"
+  },
+  "buzz-app": {
+    "from": "current",
+    "override": "overrides/rust-system-libs.nix",
+    "since": "2026-11-11",
+    "reason": "aws-lc-sys fails with AWS_LC_SYS_USE_SYSTEM=1; nix-packages pins NixOS/nixpkgs#577918 at a commit without aws-lc (the PR head has it).",
+    "link": "https://github.com/NixOS/nixpkgs/pull/577918"
+  },
+  "buzz-cli": {
+    "from": "current",
+    "override": "overrides/buzz-cli.nix",
+    "since": "2026-11-11",
+    "reason": "aws-lc-sys fails with AWS_LC_SYS_USE_SYSTEM=1 and no system aws-lc; nixos-nvme could not apply because buzz-cli (and with it buzz-app and the system) failed to build.",
+    "link": "https://github.com/NixOS/nixpkgs/pull/585760"
+  },
+  "goose-cli": {
+    "from": "current",
+    "override": "overrides/goose-cli.nix",
+    "since": "2026-11-11",
+    "reason": "aws-lc-sys fails with AWS_LC_SYS_USE_SYSTEM=1 and no system aws-lc; fixed on master after nixos-unstable stalled at 2026-11-07, and it broke the nixos-nvme build.",
+    "link": "https://github.com/NixOS/nixpkgs/commit/2f16d1a4f7"
+  },
+  "mesh-llm": {
+    "from": "current",
+    "override": "overrides/rust-system-libs.nix",
+    "since": "2026-11-11",
+    "reason": "aws-lc-sys fails with AWS_LC_SYS_USE_SYSTEM=1; nix-packages pins NixOS/nixpkgs#571722 at a commit without aws-lc (the PR head has it).",
+    "link": "https://github.com/NixOS/nixpkgs/pull/571722"
+  },
+  "newsflash": {
+    "from": "current",
+    "override": "overrides/rust-system-libs.nix",
+    "since": "2026-11-11",
+    "reason": "aws-lc-sys fails with AWS_LC_SYS_USE_SYSTEM=1 and no system aws-lc; fixed on master after nixos-unstable stalled at 2026-11-07.",
+    "link": "https://github.com/NixOS/nixpkgs/commit/a8a0d9e4d2"
+  },
   "open-webui": {
     "from": {
       "rev": "02c087f3fe673c9e317f206a627cb6b910336dbe",
@@ -56,12 +98,5 @@
     "since": "2026-11-10",
     "reason": "aws-lc-sys fails with AWS_LC_SYS_USE_SYSTEM=1 and no system aws-lc; nix-devshells' workspace shell failed to build, so direnv fell back to the old environment.",
     "link": "https://github.com/NixOS/nixpkgs/pull/584509"
-  },
-  "buzz-cli": {
-    "from": "current",
-    "override": "overrides/buzz-cli.nix",
-    "since": "2026-11-11",
-    "reason": "aws-lc-sys fails with AWS_LC_SYS_USE_SYSTEM=1 and no system aws-lc; nixos-nvme could not apply because buzz-cli (and with it buzz-app and the system) failed to build.",
-    "link": "https://github.com/NixOS/nixpkgs/pull/585760"
   }
 }
