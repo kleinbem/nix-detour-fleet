@@ -39,13 +39,6 @@
     "reason": "aws-lc-sys fails with AWS_LC_SYS_USE_SYSTEM=1 and no system aws-lc; nixos-nvme could not apply because buzz-cli (and with it buzz-app and the system) failed to build.",
     "link": "https://github.com/NixOS/nixpkgs/pull/585760"
   },
-  "goose-cli": {
-    "from": "current",
-    "override": "overrides/goose-cli.nix",
-    "since": "2026-11-11",
-    "reason": "aws-lc-sys fails with AWS_LC_SYS_USE_SYSTEM=1 and no system aws-lc; fixed on master after nixos-unstable stalled at 2026-11-07, and it broke the nixos-nvme build.",
-    "link": "https://github.com/NixOS/nixpkgs/pull/585196"
-  },
   "mesh-llm": {
     "from": "current",
     "override": "overrides/rust-system-libs.nix",
