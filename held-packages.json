@@ -67,13 +67,6 @@
     "reason": "aws-lc-sys fails with AWS_LC_SYS_USE_SYSTEM=1; nix-packages pins NixOS/nixpkgs#571722 at a commit without aws-lc (the PR head has it).",
     "link": "https://github.com/NixOS/nixpkgs/pull/571722"
   },
-  "newsflash": {
-    "from": "current",
-    "override": "overrides/rust-system-libs.nix",
-    "since": "2026-11-11",
-    "reason": "aws-lc-sys fails with AWS_LC_SYS_USE_SYSTEM=1 and no system aws-lc; fixed on master after nixos-unstable stalled at 2026-11-07.",
-    "link": "https://github.com/NixOS/nixpkgs/pull/584735"
-  },
   "oterm": {
     "from": {
       "rev": "02c087f3fe673c9e317f206a627cb6b910336dbe",
