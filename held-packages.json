@@ -7,7 +7,14 @@
     "since": "2026-10-27",
     "releaseWhen": "python3Packages.fastmcp",
     "reason": "Needs python3Packages.fastmcp, marked broken in nixos-unstable since mcp 2.x; nixos-nvme's home-manager MCP config failed to evaluate.",
-    "link": "https://github.com/NixOS/nixpkgs/pull/563493"
+    "link": "https://github.com/NixOS/nixpkgs/pull/563493",
+    "worked": {
+      "version": "0.4.1",
+      "outPaths": {
+        "aarch64-linux": "/nix/store/gkpwwk4b9rpj2g21p3442hnl3pz49lw7-agent-task-queue-0.4.1",
+        "x86_64-linux": "/nix/store/jb7zzmldljsyf4jnzw2133776mr8s1fq-agent-task-queue-0.4.1"
+      }
+    }
   },
   "aider-chat": {
     "from": {
@@ -16,7 +23,14 @@
     },
     "since": "2026-10-27",
     "reason": "Needs python3Packages.posthog, marked broken in nixos-unstable since mcp 2.x; mac-mini's persona-runtime failed to evaluate, which held back the fleet's whole lock update.",
-    "link": "https://github.com/NixOS/nixpkgs/pull/578265"
+    "link": "https://github.com/NixOS/nixpkgs/pull/578265",
+    "worked": {
+      "version": "0.86.1",
+      "outPaths": {
+        "aarch64-linux": "/nix/store/6g845hp8xzdc6p8j7hdf9wy2ls90c487-aider-chat-0.86.1",
+        "x86_64-linux": "/nix/store/vc0zhw7yn9k7kz3prvdzw07v26rlnkh2-aider-chat-0.86.1"
+      }
+    }
   },
   "berd": {
     "from": "current",
@@ -68,7 +82,14 @@
     "since": "2026-10-27",
     "releaseWhen": "python3Packages.fastmcp",
     "reason": "Needs python3Packages.fastmcp, marked broken in nixos-unstable since mcp 2.x; nix-devshells' ai shell failed to evaluate.",
-    "link": "https://github.com/NixOS/nixpkgs/pull/563493"
+    "link": "https://github.com/NixOS/nixpkgs/pull/563493",
+    "worked": {
+      "version": "0.14.7",
+      "outPaths": {
+        "aarch64-linux": "/nix/store/672i2g2q5485bcxyd7s96ncbagy293v6-oterm-0.14.7",
+        "x86_64-linux": "/nix/store/cs7pd6r8c78wpkl85izwgiymf3ynbhgr-oterm-0.14.7"
+      }
+    }
   },
   "paperless-ngx": {
     "from": "current",
