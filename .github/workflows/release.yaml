@@ -32,7 +32,7 @@ jobs:
           attic-token: ${{ secrets.ATTIC_PULL_TOKEN }}
           netbird-setup-key: ${{ secrets.NETBIRD_SETUP_KEY_EPHEMERAL }}
 
-      - uses: kleinbem-dev/nix-detour/hold-release@e0504b7ed4a7fe909fcc5a042b5e52632e209a19 # main after v0.3.1 (open-prs, keep)
+      - uses: kleinbem-dev/nix-detour/hold-release@92d9d15cdc8945903b261e69e2072acacc2108bd # v0.5.0
         id: check
         with:
           open-prs: "false"
@@ -66,7 +66,7 @@ jobs:
           attic-token: ${{ secrets.ATTIC_PULL_TOKEN }}
           netbird-setup-key: ${{ secrets.NETBIRD_SETUP_KEY_EPHEMERAL }}
 
-      - uses: kleinbem-dev/nix-detour/hold-release@e0504b7ed4a7fe909fcc5a042b5e52632e209a19 # main after v0.3.1 (open-prs, keep)
+      - uses: kleinbem-dev/nix-detour/hold-release@92d9d15cdc8945903b261e69e2072acacc2108bd # v0.5.0
         id: release
         with:
           token: ${{ steps.app-token.outputs.token }}

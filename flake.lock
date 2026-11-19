@@ -10,11 +10,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1794969439,
-        "narHash": "sha256-JxC+AZt81JV/+G+Nm19pd8bPZtxA1NAgZc+Ns3+fs6Q=",
+        "lastModified": 1795045707,
+        "narHash": "sha256-Pr039r1Hpu3v6EwJNgnSjEgDmqducoeMOrsxoaE8cSY=",
         "owner": "kleinbem-dev",
         "repo": "nix-detour",
-        "rev": "55caed8429c359966cfb5078c5f6272d3abdeb3b",
+        "rev": "92d9d15cdc8945903b261e69e2072acacc2108bd",
         "type": "github"
       },
       "original": {
