@@ -16,22 +16,6 @@
       }
     }
   },
-  "aider-chat": {
-    "from": {
-      "rev": "02c087f3fe673c9e317f206a627cb6b910336dbe",
-      "narHash": "sha256-IoNisKcGbUjdd45qCqywGMCYmZ5EnkxezvLII0FWwNA="
-    },
-    "since": "2026-10-27",
-    "reason": "Needs python3Packages.posthog, marked broken in nixos-unstable since mcp 2.x; mac-mini's persona-runtime failed to evaluate, which held back the fleet's whole lock update.",
-    "link": "https://github.com/NixOS/nixpkgs/pull/578265",
-    "worked": {
-      "version": "0.86.1",
-      "outPaths": {
-        "aarch64-linux": "/nix/store/6g845hp8xzdc6p8j7hdf9wy2ls90c487-aider-chat-0.86.1",
-        "x86_64-linux": "/nix/store/vc0zhw7yn9k7kz3prvdzw07v26rlnkh2-aider-chat-0.86.1"
-      }
-    }
-  },
   "berd": {
     "from": "current",
     "override": "overrides/rust-system-libs.nix",
@@ -52,13 +36,6 @@
     "since": "2026-11-11",
     "reason": "aws-lc-sys fails with AWS_LC_SYS_USE_SYSTEM=1 and no system aws-lc; nixos-nvme could not apply because buzz-cli (and with it buzz-app and the system) failed to build.",
     "link": "https://github.com/NixOS/nixpkgs/pull/585760"
-  },
-  "home-assistant-custom-components.auth_oidc": {
-    "from": "current",
-    "since": "2026-11-18",
-    "override": "overrides/auth_oidc.nix",
-    "reason": "Two auth_oidc tests index hass.data[person] as a tuple, a PersonData object since Home Assistant 2026.11; container-factory's Home Assistant image stopped building. Fixed on master, nixos-unstable stuck since 2026-11-13.",
-    "link": "https://github.com/NixOS/nixpkgs/pull/587567"
   },
   "mesh-llm": {
     "from": "current",
@@ -83,24 +60,5 @@
         "x86_64-linux": "/nix/store/cs7pd6r8c78wpkl85izwgiymf3ynbhgr-oterm-0.14.7"
       }
     }
-  },
-  "paperless-ngx": {
-    "from": "current",
-    "since": "2026-11-18",
-    "override": "overrides/paperless-ngx.nix",
-    "reason": "paperless-ngx 3.4.2 requires torch<2.15 and nixos-unstable has 2.15.0; container-factory's paperless image stopped building. Fixed on master, nixos-unstable stuck since 2026-11-13.",
-    "link": "https://github.com/NixOS/nixpkgs/pull/587638"
-  },
-  "qdrant": {
-    "from": "current",
-    "since": "2026-11-01",
-    "patches": [
-      {
-        "url": "https://raw.githubusercontent.com/MiniHarinn/nixpkgs/b650fbaa91851f4e57f66ab811fdffcd5bac31c1/pkgs/by-name/qd/qdrant/0001-disable-avx512vnni.patch",
-        "hash": "sha256-QyG5gTn2LfZwPVTGWcTnNoc7oq830Wv/VyNmEbPDN+c="
-      }
-    ],
-    "reason": "rustc's stdarch and nixpkgs' LLVM disagree on an AVX-512 VNNI intrinsic (vpdpbusd), so qdrant's quantization crate fails to compile; this source patch from NixOS/nixpkgs#553347 disables those code paths. Ends once nixpkgs' qdrant builds again (rustc on LLVM 23, NixOS/nixpkgs#578990, plus a zstd input on staging-next). Held on stable (1.17.1) from 2026-10-13 until this fix on 2026-11-01.",
-    "link": "https://github.com/NixOS/nixpkgs/issues/553191"
   }
 }
